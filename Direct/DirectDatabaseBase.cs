@@ -17,7 +17,7 @@ namespace Direct
     public string DatabaseScheme { get; protected set; } = string.Empty;
     public string DatabaseSchemeString { get => string.IsNullOrEmpty(this.DatabaseScheme) ? "" : this.DatabaseScheme + "."; }
     public DirectDatabaseImplementation Loader { get; protected set; } = null;
-    public DirectTransactionalManager TransactionalManager { get; protected set; } = null;
+    public DirectTransactionalManager TransactionalManager { get; set; } = null;
     public abstract DMGenerator Generator { get; }
 
     protected string ConnectionString { get; private set; } = string.Empty;
@@ -42,25 +42,25 @@ namespace Direct
     /// QUERY CONSTRUCTION
     ///
 
-    internal virtual string QueryContructLoadByID { get => "SELECT {0} FROM [].{1} WHERE {2}={3};"; }
-    internal virtual string QueryLoadSingle { get => "SELECT {0} FROM [].{1} {2} LIMIT 1;"; }
-    internal virtual string QueryCount { get => "SELECT COUNT(*) FROM [].{0} {1};"; }
-    internal virtual string QueryContructLoadByStringID { get => "SELECT {0} FROM [].{1} WHERE {2}='{3}';"; }
-    internal virtual string QueryContructLoad { get => "SELECT {0} FROM [].{1} {2} {3}"; }
-    internal virtual string QueryContructLoadWithLimit { get => "SELECT {0} FROM [].{1} {2} {3} {limit}"; }
+    internal virtual string QueryContructLoadByID { get => "SELECT [{0}] FROM [].{1} WHERE {2}={3};"; }
+    internal virtual string QueryLoadSingle { get => "SELECT [{0}] FROM [].{1} {2} LIMIT 1;"; }
+    internal virtual string QueryCount { get => "SELECT COUNT(*) FROM [].[{0}] {1};"; }
+    internal virtual string QueryContructLoadByStringID { get => "SELECT [{0}] FROM [].{1} WHERE {2}='{3}';"; }
+    internal virtual string QueryContructLoad { get => "SELECT [{0}] FROM [].{1} {2} {3}"; }
+    internal virtual string QueryContructLoadWithLimit { get => "SELECT [{0}] FROM [].{1} {2} {3} {limit}"; }
     internal virtual string QueryLimit { get => "LIMIT "; }
 
     internal virtual string QueryContructLoadWithLimitConstruct<T>(DirectQueryLoader<T> loader) where T : DirectModel
     {
       if (loader.Limit.HasValue == false)
         return this.QueryContructLoadWithLimit.Replace("{limit}", string.Empty);
-      return this.QueryContructLoadWithLimit.Replace("{limit}", string.Format("{0} {1}", this.QueryLimit, loader.Limit.Value));
+      return this.QueryContructLoadWithLimit.Replace("{limit}", string.Format("[{0}] {1}", this.QueryLimit, loader.Limit.Value));
     }
 
-    internal virtual string QueryConstructInsertQuery { get => "INSERT INTO [].{0} ({1}) VALUES ({2});"; }
-    internal virtual string QueryConstructUpdateQuery { get => "UPDATE [].{0} SET {1} WHERE {2}={3};"; }
-    internal virtual string QueryConstructUpdateUpdatedQuery { get => "UPDATE [].{0} SET {1}={2} WHERE {3}={4};"; }
-    internal virtual string QueryDelete { get => "DELETE FROM [].{0} WHERE {1}={2};"; }
+    internal virtual string QueryConstructInsertQuery { get => "INSERT INTO [].[{0}] ({1}) VALUES ({2});"; }
+    internal virtual string QueryConstructUpdateQuery { get => "UPDATE [].[{0}] SET {1} WHERE {2}={3};"; }
+    internal virtual string QueryConstructUpdateUpdatedQuery { get => "UPDATE [].[{0}] SET {1}={2} WHERE {3}={4};"; }
+    internal virtual string QueryDelete { get => "DELETE FROM [].[{0}] WHERE {1}={2};"; }
 
     ///
     /// CONSTRUCTORS
@@ -78,12 +78,16 @@ namespace Direct
 
     }
 
-    ~DirectDatabaseBase() => OnDispose();
-    public void Dispose() => OnDispose();
+    ~DirectDatabaseBase()
+    {
+     // OnDispose();
+    } 
+    public void Dispose() 
+      => OnDispose();
     protected void OnDispose()
     {
       // here we will close DirectConnection
-      this.TransactionalManager.RunAsync();
+      //this.TransactionalManager.RunAsync();
     }
 
     ///

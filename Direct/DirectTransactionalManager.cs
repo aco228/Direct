@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Direct
 {
-  public class DirectTransactionalManager
+  public class DirectTransactionalManager : IDisposable
   {
     private static object LockObj = new object();
     private bool IsRunExecuting { get; set; } = false;
@@ -150,6 +150,10 @@ namespace Direct
         this.IsRunExecuting = false;
       }
     }
-    
+
+    public void Dispose()
+    {
+      this.Run();
+    }
   }
 }

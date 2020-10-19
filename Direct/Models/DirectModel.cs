@@ -111,7 +111,7 @@ namespace Direct.Models
     internal string GetTableName() 
       => string.Format("{0}{1}",
         !string.IsNullOrEmpty(this.GetSchemaName()) ? string.Format("[{0}]", this.GetSchemaName()) + "." : "", 
-        string.Format("[{0}]", this.TableName)); 
+        string.Format("{0}", this.TableName)); 
 
     internal string GetIdNameValue() => this.IdName;
 
