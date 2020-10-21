@@ -100,33 +100,21 @@ namespace Direct
     ///
     public IEnumerable<DirectContainerRow> LoadEnumerable(string command, params object[] parameters) => this.Loader.LoadEnumerable(command, parameters);
     public IEnumerable<DirectContainerRow> LoadEnumerable(string command) => this.Loader.LoadEnumerable(command);
-    public IEnumerable<DirectContainerRow> LoadEnumerable(DbConnection connection, string command, params object[] parameters) => this.Loader.LoadEnumerable(connection, command, parameters);
-    public IEnumerable<DirectContainerRow> LoadEnumerable(DbConnection connection, string command) => this.Loader.LoadEnumerable(connection, command);
 
     public IAsyncEnumerable<DirectContainerRow> LoadEnumerableAsync(string command, params object[] parameters) => this.Loader.LoadEnumerableAsync(command, parameters);
     public IAsyncEnumerable<DirectContainerRow> LoadEnumerableAsync(string command) => this.Loader.LoadEnumerableAsync(command);
-    public IAsyncEnumerable<DirectContainerRow> LoadEnumerableAsync(DbConnection connection, string command, params object[] parameters) => this.Loader.LoadEnumerableAsync(connection, command, parameters);
-    public IAsyncEnumerable<DirectContainerRow> LoadEnumerableAsync(DbConnection connection, string command) => this.Loader.LoadEnumerableAsync(connection, command);
 
     public DirectLoadResult Load(string query, params object[] parameters) => this.Loader.Load(query, parameters);
     public DirectLoadResult Load(string command) => this.Loader.Load(command);
-    public DirectLoadResult Load(DbConnection connection, string query, params object[] parameters) => this.Loader.Load(connection, query, parameters);
-    public DirectLoadResult Load(DbConnection connection, string command) => this.Loader.Load(connection, command);
 
     public Task<DirectLoadResult> LoadAsync(string query, params object[] parameters) => this.Loader.LoadAsync(query, parameters);
     public Task<DirectLoadResult> LoadAsync(string command) => this.Loader.LoadAsync(command);
-    public Task<DirectLoadResult> LoadAsync(DbConnection connection, string query, params object[] parameters) => this.Loader.LoadAsync(connection, query, parameters);
-    public Task<DirectLoadResult> LoadAsync(DbConnection connection, string command) => this.Loader.LoadAsync(connection, command);
 
     public DirectExecuteResult Execute(string query, params object[] parameters) => this.Loader.Execute(query, parameters);
     public DirectExecuteResult Execute(string command) => this.Loader.Execute(command);
-    public DirectExecuteResult Execute(DbConnection connection, string query, params object[] parameters) => this.Loader.Execute(connection, query, parameters);
-    public DirectExecuteResult Execute(DbConnection connection, string inputCommand) => this.Loader.Execute(connection, inputCommand);
 
     public Task<DirectExecuteResult> ExecuteAsync(string query, params object[] parameters) => this.Loader.ExecuteAsync(query, parameters);
     public Task<DirectExecuteResult> ExecuteAsync(string command) => this.Loader.ExecuteAsync(command);
-    public Task<DirectExecuteResult> ExecuteAsync(DbConnection connection, string query, params object[] parameters) => this.Loader.ExecuteAsync(connection, query, parameters);
-    public Task<DirectExecuteResult> ExecuteAsync(DbConnection connection, string command) => this.Loader.ExecuteAsync(connection, command);
 
 
     ///
@@ -135,23 +123,15 @@ namespace Direct
 
     public IEnumerable<T> Load<T>(string command, params object[] parameters) => this.Loader.Load<T>(command, parameters);
     public IEnumerable<T> Load<T>(string command) => this.Loader.Load<T>(command);
-    public IEnumerable<T> Load<T>(DbConnection connection, string command, params object[] parameters) => this.Loader.Load<T>(connection, command, parameters);
-    public IEnumerable<T> Load<T>(DbConnection connection, string command) => this.Loader.Load<T>(connection, command);
 
     public Task<IEnumerable<T>> LoadAsync<T>(string command, params object[] parameters) => this.Loader.LoadAsync<T>(command, parameters);
     public Task<IEnumerable<T>> LoadAsync<T>(string command) => this.Loader.LoadAsync<T>(command);
-    public Task<IEnumerable<T>> LoadAsync<T>(DbConnection connection, string command, params object[] parameters) => this.Loader.LoadAsync<T>(connection, command, parameters);
-    public Task<IEnumerable<T>> LoadAsync<T>(DbConnection connection, string command) => this.Loader.LoadAsync<T>(connection, command);
 
     public virtual T LoadSingle<T>(string command, params object[] parameters) => this.Loader.LoadSingle<T>(command, parameters);
     public T LoadSingle<T>(string command) => this.Loader.LoadSingle<T>(command);
-    public virtual T LoadSingle<T>(DbConnection connection, string command, params object[] parameters) => this.Loader.LoadSingle<T>(connection, command, parameters);
-    public T LoadSingle<T>(DbConnection connection, string command) => this.Loader.LoadSingle<T>(connection, command);
 
     public virtual Task<T> LoadSingleAsync<T>(string command, params object[] parameters) => this.Loader.LoadSingleAsync<T>(command, parameters);
     public Task<T> LoadSingleAsync<T>(string command) => this.Loader.LoadSingleAsync<T>(command);
-    public virtual Task<T> LoadSingleAsync<T>(DbConnection connection, string command, params object[] parameters) => this.Loader.LoadSingleAsync<T>(connection, command, parameters);
-    public Task<T> LoadSingleAsync<T>(DbConnection connection, string command) => this.Loader.LoadSingleAsync<T>(connection, command);
 
 
     ///

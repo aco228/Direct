@@ -113,7 +113,8 @@ namespace Direct
       if (model.IntegerPrimary && !model.ID.HasValue)
         throw new Exception("ID is not set, maybe this table was not loaded");
 
-      DirectExecuteResult result = db.Execute(model.ConstructUpdateQuery());
+      string query = model.ConstructUpdateQuery();
+      DirectExecuteResult result = db.Execute(query);
       if (!result.IsSuccessfull)
         return null;
       else
